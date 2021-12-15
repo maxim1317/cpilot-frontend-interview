@@ -4,14 +4,15 @@
 
 Сервер запускается любым способом из представленных ниже.
 
-По умолчанию сервер запускается на `http://localhost:8000`
-OpenAPI докумеетация доступна на `http://localhost:8000/docs`
+
+По умолчанию сервер запускается на `http://localhost:8000`.
+
+OpenAPI документация доступна на `http://localhost:8000/docs`.
 
 ### Python
 
 ```bash
 pip install -r requirements.txt
-
 uvicorn app:app
 ```
 
