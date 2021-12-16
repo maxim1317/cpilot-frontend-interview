@@ -107,11 +107,11 @@ async def get_devices() -> List[Device]:
 )
 async def get_telemetry(device_id: int) -> TelemetryMessage:
     """Получить тестовое сообщение с устройства."""
-    if device_id >= DEVICE_COUNT:
+    if device_id < 1 or device_id > DEVICE_COUNT:
 
         message = (
             f"No such device id {device_id}, "
-            f"Available devices: 0-{DEVICE_COUNT - 1}"
+            f"Available devices: 1-{DEVICE_COUNT}"
         )
         LOGGER.error(message)
         raise HTTPException(
@@ -130,11 +130,11 @@ async def websocket_telemetry(websocket: WebSocket, device_id: int):
     message = "Client connected to device {device_id}"
     LOGGER.info(message)
     try:
-        if device_id >= DEVICE_COUNT:
+        if device_id < 1 or device_id > DEVICE_COUNT:
 
             message = (
                 f"No such device id {device_id}, "
-                f"Available devices: 0-{DEVICE_COUNT - 1}"
+                f"Available devices: 1-{DEVICE_COUNT}"
             )
             LOGGER.error(message)
             await websocket.close(code=404)
