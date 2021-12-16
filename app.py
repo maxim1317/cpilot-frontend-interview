@@ -44,6 +44,17 @@ class EventType(str, Enum):
     warn = "WARNING"
     error = "ERROR"
 
+class Message():
+    nouns = ("puppy", "car", "rabbit", "girl", "monkey")
+    verbs = ("runs", "hits", "jumps", "drives", "barfs")
+    adv = ("crazily.", "dutifully.", "foolishly.", "merrily.", "occasionally.")
+    adj = ("adorable", "clueless", "dirty", "odd", "stupid")
+
+    @classmethod
+    def generate(self):
+        l = [self.nouns,self.verbs,self.adj,self.adv]
+        return ' '.join([random.choice(i) for i in l])
+
 
 class TelemetryMessage(BaseModel):
     """Сообщение телеметрии."""
@@ -58,7 +69,7 @@ class TelemetryMessage(BaseModel):
         )
     )
     message: str = Field(
-        default_factory=lambda: f"Test description {random.random()}"
+        default_factory=lambda: Message.generate()
     )
 
 
@@ -85,7 +96,7 @@ async def get_devices() -> List[Device]:
             id=i,
             name=f"Device {i}",
         )
-        for i in range(DEVICE_COUNT)
+        for i in range(1, DEVICE_COUNT+1)
     ]
 
 
